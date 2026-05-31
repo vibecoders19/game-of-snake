@@ -61,7 +61,7 @@ function endGame() {
 }
 
 // Draw the empty board on page load and wire up the start button
-ctx.fillStyle = '#0f0f23';
+ctx.fillStyle = '#080a14';
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 document.getElementById('restart-btn').addEventListener('click', init);

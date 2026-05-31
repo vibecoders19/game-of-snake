@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,111 +7,230 @@
 }
 
 body {
-  background: #1a1a2e;
+  background: radial-gradient(ellipse at 50% 40%, #1a1e3a 0%, #080a14 70%);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Orbitron', 'Segoe UI', Tahoma, sans-serif;
   color: #eee;
+  overflow: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 15% 25%, rgba(78, 204, 163, 0.06) 0%, transparent 50%),
+    radial-gradient(circle at 85% 75%, rgba(233, 69, 96, 0.06) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 16px;
+  font-size: 2.6rem;
+  font-weight: 900;
+  margin-bottom: 22px;
   color: #4ecca3;
-  letter-spacing: 4px;
+  letter-spacing: 10px;
   text-transform: uppercase;
+  text-shadow:
+    0 0 8px rgba(78, 204, 163, 0.9),
+    0 0 25px rgba(78, 204, 163, 0.5),
+    0 0 60px rgba(78, 204, 163, 0.25);
 }
 
+/* Glass scoreboard panel */
 #scoreboard {
   display: flex;
-  gap: 48px;
-  margin-bottom: 16px;
-  font-size: 1.1rem;
+  margin-bottom: 22px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(78, 204, 163, 0.18);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
 }
 
 .score-box {
   text-align: center;
+  padding: 10px 44px;
+}
+
+.score-box + .score-box {
+  border-left: 1px solid rgba(78, 204, 163, 0.18);
 }
 
 .score-label {
-  font-size: 0.75rem;
-  color: #888;
-  letter-spacing: 2px;
+  font-size: 0.6rem;
+  color: #4a5568;
+  letter-spacing: 3px;
   text-transform: uppercase;
+  margin-bottom: 4px;
 }
 
 .score-value {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 1.9rem;
+  font-weight: 700;
   color: #4ecca3;
+  text-shadow: 0 0 12px rgba(78, 204, 163, 0.55);
+  font-variant-numeric: tabular-nums;
 }
 
+/* Arcade bezel around the canvas */
 #game-wrapper {
   position: relative;
+  padding: 14px;
+  background: linear-gradient(160deg, #1c2040 0%, #0b0d1c 100%);
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px rgba(78, 204, 163, 0.12),
+    0 0 0 3px #08090f,
+    0 0 0 4px rgba(78, 204, 163, 0.08),
+    0 24px 64px rgba(0, 0, 0, 0.7),
+    0 0 100px rgba(78, 204, 163, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Corner bracket accents */
+#game-wrapper::before,
+#game-wrapper::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-color: rgba(78, 204, 163, 0.45);
+  border-style: solid;
+}
+
+#game-wrapper::before {
+  top: 5px;
+  left: 5px;
+  border-width: 2px 0 0 2px;
+  border-radius: 3px 0 0 0;
+}
+
+#game-wrapper::after {
+  bottom: 5px;
+  right: 5px;
+  border-width: 0 2px 2px 0;
+  border-radius: 0 0 3px 0;
 }
 
 canvas {
   display: block;
-  border: 2px solid #4ecca3;
-  border-radius: 4px;
-  box-shadow: 0 0 30px rgba(78, 204, 163, 0.3);
-  background: #0f0f23;
+  border-radius: 6px;
+  background: #080a14;
+  box-shadow:
+    inset 0 0 50px rgba(0, 0, 0, 0.6),
+    0 0 20px rgba(78, 204, 163, 0.1);
 }
 
+/* Game over / start overlay */
 #overlay {
   position: absolute;
-  inset: 0;
+  inset: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgba(15, 15, 35, 0.88);
-  border-radius: 4px;
-  gap: 16px;
+  background: rgba(6, 7, 18, 0.93);
+  border-radius: 6px;
+  gap: 18px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(78, 204, 163, 0.08);
 }
 
 #overlay h2 {
   font-size: 2rem;
+  font-weight: 900;
   color: #e94560;
-  letter-spacing: 3px;
+  letter-spacing: 6px;
+  text-shadow:
+    0 0 10px rgba(233, 69, 96, 0.9),
+    0 0 30px rgba(233, 69, 96, 0.4),
+    0 0 60px rgba(233, 69, 96, 0.2);
 }
 
 #overlay p {
-  color: #aaa;
-  font-size: 1rem;
+  color: #3a4050;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
 }
 
 #overlay .final-score {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  font-weight: 700;
   color: #4ecca3;
+  text-shadow: 0 0 14px rgba(78, 204, 163, 0.6);
 }
 
+/* 3D arcade-style button */
 #restart-btn {
-  margin-top: 8px;
-  padding: 12px 32px;
-  font-size: 1rem;
-  font-weight: bold;
-  letter-spacing: 2px;
+  margin-top: 6px;
+  padding: 13px 38px;
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  background: transparent;
   color: #4ecca3;
-  border: 2px solid #4ecca3;
-  border-radius: 4px;
+  background: linear-gradient(180deg,
+    rgba(78, 204, 163, 0.14) 0%,
+    rgba(78, 204, 163, 0.05) 100%);
+  border: 1px solid rgba(78, 204, 163, 0.5);
+  border-radius: 7px;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s;
+  transition: all 0.15s ease;
+  box-shadow:
+    0 5px 0 rgba(30, 90, 70, 0.6),
+    0 7px 18px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  text-shadow: 0 0 10px rgba(78, 204, 163, 0.5);
 }
 
 #restart-btn:hover {
-  background: #4ecca3;
-  color: #0f0f23;
+  background: linear-gradient(180deg,
+    rgba(78, 204, 163, 0.28) 0%,
+    rgba(78, 204, 163, 0.12) 100%);
+  box-shadow:
+    0 5px 0 rgba(30, 90, 70, 0.6),
+    0 10px 24px rgba(78, 204, 163, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  text-shadow: 0 0 16px rgba(78, 204, 163, 0.9);
+  transform: translateY(-1px);
 }
 
+#restart-btn:active {
+  transform: translateY(4px);
+  box-shadow:
+    0 1px 0 rgba(30, 90, 70, 0.6),
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Keyboard-badge controls hint */
 #controls-hint {
-  margin-top: 14px;
-  font-size: 0.8rem;
-  color: #555;
+  margin-top: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.65rem;
+  color: #2a3040;
   letter-spacing: 1px;
+}
+
+.key {
+  display: inline-block;
+  padding: 3px 9px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.06);
+  border-radius: 4px;
+  font-size: 0.6rem;
+  color: #3a4050;
+  font-family: inherit;
 }
